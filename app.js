@@ -19,14 +19,15 @@
     </div > 
  */ 
 //creating nested elements using react
-
+import React from "react"
+import { createRoot } from "react-dom/client"
 const parent=React.createElement(
     "div",
     {id:"parent"},
     [React.createElement(
         "div",
         {id:"child"},
-        [React.createElement("h1",{},"heelooo"),React.createElement("h2",{},"i am an h2 tag")]
+        [React.createElement("h1",{},"heelooo"),React.createElement("h2",{},"this is namaste react")]
     ),
     React.createElement(
         "div",
@@ -35,7 +36,7 @@ const parent=React.createElement(
 ) 
 
 console.log(parent);
-const root=ReactDOM.createRoot(document.getElementById("root"))
+const root=createRoot(document.getElementById("root"))
 root.render(parent) //putting parent inside the root tag
 //if there is a tag already in the root, it will be replaced by this. ie,render method replaces everything inside the root  
 
