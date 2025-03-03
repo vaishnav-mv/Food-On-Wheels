@@ -1,42 +1,47 @@
-// const heading = React.createElement(
-//     "h1",
-//     { id: "heading" },
-//     "hello world all"
-// )
-// console.log(heading); //return an object
+import React from "react";
+import ReactDOM from "react-dom/client"
+const heading = <h1>hello from jsx</h1>  //react element
+const root = ReactDOM.createRoot(document.getElementById("root"))
+// root.render(heading)
 
-// const root = ReactDOM.createRoot(document.getElementById("root"))
+const elem = <span>hello this is a span react elem</span>
 
-// root.render(heading) //passing an object inside the render
+//React element
+const headingelement = (
 
-//react element is an object. When rendering on the dom, this react element becomes an html that the browser understands and puts it into the dom
+    <h1>
+        {elem}
+        this is a react element
+    </h1>
+)
 
 
-/**< div id = "parent" >
-     <div id="child">
-         <h1>heelooo</h1>
-     </div>
-    </div > 
- */ 
-//creating nested elements using react
-import React from "react"
-import { createRoot } from "react-dom/client"
-const parent=React.createElement(
-    "div",
-    {id:"parent"},
-    [React.createElement(
-        "div",
-        {id:"child"},
-        [React.createElement("h1",{},"heelooo"),React.createElement("h2",{},"this is namaste react")]
-    ),
-    React.createElement(
-        "div",
-        {id:"child"},
-        [React.createElement("h1",{},"heelooo"),React.createElement("h2",{},"i am an h2 tag")]) ] //if you want to make siblings, pass it as an array
-) 
+//React functional component
+const Heading1 = () => <h1 id="heading1">hello1 form jsx</h1>   //you can also do it using normal function. but you need to return it
 
-console.log(parent);
-const root=createRoot(document.getElementById("root"))
-root.render(parent) //putting parent inside the root tag
-//if there is a tag already in the root, it will be replaced by this. ie,render method replaces everything inside the root  
+const Heading3 = () => {
+    return <h1 id="heading3">hello3 from jsx</h1>
+}
 
+const n = 1000
+//to render heading1 inside a div in another react component
+const Heading2 = () => (
+    <div id="container">
+        {/* you can run any piece of js code inside this */}
+        {n}
+        {Heading3()}
+        <Heading3/>
+
+        {/* since react element is a normal js obj, it can be put inside this component inside {} */}
+        {headingelement}
+
+        {/* component composition           */}
+        <Heading1 />
+        <h1 id="heading2">hello2 from jsx</h1>
+    </div>
+
+)
+
+
+
+root.render(<Heading2 />)
