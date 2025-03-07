@@ -1,47 +1,66 @@
 import React from "react";
 import ReactDOM from "react-dom/client"
-const heading = <h1>hello from jsx</h1>  //react element
-const root = ReactDOM.createRoot(document.getElementById("root"))
-// root.render(heading)
 
-const elem = <span>hello this is a span react elem</span>
-
-//React element
-const headingelement = (
-
-    <h1>
-        {elem}
-        this is a react element
-    </h1>
-)
-
-
-//React functional component
-const Heading1 = () => <h1 id="heading1">hello1 form jsx</h1>   //you can also do it using normal function. but you need to return it
-
-const Heading3 = () => {
-    return <h1 id="heading3">hello3 from jsx</h1>
+const Header = () => {
+    return (
+        <div className="header">
+            <div className="logo-container">
+                <img className="logo" src="https://img.freepik.com/free-vector/food-shopping-logo-template-design_460848-10299.jpg"></img>
+            </div>
+            <div className="nav-items">
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                    <li>Cart</li>
+                </ul>
+            </div>
+        </div>
+    )
 }
 
-const n = 1000
-//to render heading1 inside a div in another react component
-const Heading2 = () => (
-    <div id="container">
-        {/* you can run any piece of js code inside this */}
-        {n}
-        {Heading3()}
-        <Heading3/>
+//when you are giving inline css, you should give it as an object
+const stylecard = {
+    backgroundColor: "yellow"
+}
 
-        {/* since react element is a normal js obj, it can be put inside this component inside {} */}
-        {headingelement}
+const RestaurantCard = () => {
+    return (
+        <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
+            {/* // <div className="res-card" style={stylecard}>     */}
+            <img className="res-logo"
+                alt="res-logo"
+                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/wo4yr53jpsf72vmz4qvd"></img>
+            <h3>Meghna Foods</h3>
+            <h4>South Indian, North Indian, Biriyani</h4>
+            <h4>4.4 stars</h4>
+        </div>
+    )
+}
 
-        {/* component composition           */}
-        <Heading1 />
-        <h1 id="heading2">hello2 from jsx</h1>
+const Body = () => {
+    return (
+        <div className="body">
+            <div className="search">Search</div>
+            <div className="res-container">
+                <RestaurantCard></RestaurantCard>
+                <RestaurantCard></RestaurantCard>
+                <RestaurantCard></RestaurantCard>
+                <RestaurantCard></RestaurantCard>
+                <RestaurantCard></RestaurantCard>
+                <RestaurantCard></RestaurantCard>
+                <RestaurantCard></RestaurantCard>
+                <RestaurantCard></RestaurantCard>
+            </div>
+        </div>
+    )
+}
+
+const AppLayout = () => {
+    return <div className="app">
+        <Header></Header>
+        <Body></Body>
     </div>
-
-)
-
-
-
-root.render(<Heading2 />)
+}
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(<AppLayout></AppLayout>)
