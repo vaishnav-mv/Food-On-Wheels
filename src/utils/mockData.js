@@ -1,29 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client"
-
-const Header = () => {
-    return (
-        <div className="header">
-            <div className="logo-container">
-                <img className="logo" src="https://img.freepik.com/free-vector/food-shopping-logo-template-design_460848-10299.jpg"></img>
-            </div>
-            <div className="nav-items">
-                <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                    <li>Cart</li>
-                </ul>
-            </div>
-        </div>
-    )
-}
-
-//when you are giving inline css, you should give it as an object
-const stylecard = {
-    backgroundColor: "yellow"
-}
-
 const resList = [{
     "card": {
       "card": {
@@ -680,42 +654,4 @@ const resList = [{
   }
 ]
 
-const RestaurantCard = (props) => { //reusable card
-    const {resData}=props
-    const {name,cuisines,avgRating,cloudinaryImageId}=resData?.card?.card?.info
-    return (
-        <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
-            {/* // <div className="res-card" style={stylecard}>     */}
-            <img className="res-logo"
-                alt="res-logo"
-                src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+cloudinaryImageId}></img>
-            <h3>{name}</h3>
-            <h3>{cuisines.join(",")}</h3>
-            <h3>{avgRating}</h3>
-            
-        </div>
-    )
-}
-
-const Body = () => {
-    return (
-        <div className="body">
-            <div className="search">Search</div>
-            <div className="res-container">
-                {
-                    resList.map(restaurant=><RestaurantCard key={restaurant.card.card.info.id} resData={restaurant}></RestaurantCard>)
-
-                }
-            </div>
-        </div>
-    )
-}
-
-const AppLayout = () => {
-    return <div className="app">
-        <Header></Header>
-        <Body></Body>
-    </div>
-}
-const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(<AppLayout></AppLayout>)
+export default resList
