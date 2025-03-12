@@ -1,14 +1,15 @@
 import RestaurantCard from "./RestaurantCard"
 import resList from "../utils/mockData"
 import { useEffect, useState } from "react"
+import Shimmer from "./Shimmer";
 
 
 const Body = () => {
     // Initialize with restaurant cards from mock data
-    let [restList, setListOfRest] = useState(
-        resList?.data?.cards.filter(
-            card => card?.card?.card?.["@type"]?.includes("Restaurant")
-        ) || []
+    let [restList, setListOfRest] = useState([]
+        // resList?.data?.cards.filter(
+        //     card => card?.card?.card?.["@type"]?.includes("Restaurant")
+        // ) || []
     );
 
     useEffect(() => {
@@ -18,6 +19,7 @@ const Body = () => {
     const fetchData = async () => {
         try {
             const data = await fetch("http://localhost:5000/api/swiggy");
+            // const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9121181&lng=77.6445548&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null");
             const json = await data.json();
             console.log(json);
             // Filter only restaurant cards from the response
@@ -32,7 +34,12 @@ const Body = () => {
         }
     };
 
-    return (
+    //conditional rendering
+    // if(restList.length===0){
+    //     return <Shimmer></Shimmer>
+    // }
+
+    return restList.length===0 ? <Shimmer></Shimmer> : (
         <div className="body">
             <div className="filter">
                 <button
