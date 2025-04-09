@@ -2,4 +2,4 @@ export const CDN_URL="https://media-assets.swiggy.com/swiggy/image/upload/fl_los
 
 export const LOGO_URL="https://img.freepik.com/free-vector/food-shopping-logo-template-design_460848-10299.jpg"
 
-
+// export const MENU_API=

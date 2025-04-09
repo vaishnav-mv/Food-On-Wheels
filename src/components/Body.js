@@ -1,16 +1,21 @@
 import RestaurantCard from "./RestaurantCard"
 import resList from "../utils/mockData"
 import { useEffect, useState } from "react"
-import Shimmer from "./Shimmer";
+import Shimmer from "./Shimmer"
+import { Link } from "react-router-dom"
 
 
 const Body = () => {
     // Initialize with restaurant cards from mock data
-    let [restList, setListOfRest] = useState([]
+    const [restList, setListOfRest] = useState([]
         // resList?.data?.cards.filter(
         //     card => card?.card?.card?.["@type"]?.includes("Restaurant")
         // ) || []
     );
+
+    const [filteredRestaurant, setFilteredRestaurant] = useState([])
+
+    const [searchText, setSeachText] = useState("")
 
     useEffect(() => {
         fetchData();
@@ -26,8 +31,9 @@ const Body = () => {
             const restaurants = json?.data?.cards.filter(
                 card => card?.card?.card?.["@type"]?.includes("Restaurant")
             ) || [];
-            
+
             setListOfRest(restaurants);
+            setFilteredRestaurant(restaurants)
         } catch (error) {
             console.error("Error fetching data:", error);
             setListOfRest([]); // Set empty array on error
@@ -39,9 +45,22 @@ const Body = () => {
     //     return <Shimmer></Shimmer>
     // }
 
-    return restList.length===0 ? <Shimmer></Shimmer> : (
+    return restList.length === 0 ? <Shimmer></Shimmer> : (
         <div className="body">
             <div className="filter">
+                <div className="search">
+                    <input type="text"
+                        className="search-box"
+                        value={searchText}
+                        onChange={(e) => {
+                            setSeachText(e.target.value)
+                        }}></input>
+                    <button onClick={() => {
+                        console.log(searchText)
+                        const filteredRes = restList.filter((res) => res.card.card.info.name.toLowerCase().includes(searchText.toLowerCase()))
+                        setFilteredRestaurant(filteredRes)
+                    }}>Search</button>
+                </div>
                 <button
                     className="filter-btn"
                     onClick={() => {
@@ -57,11 +76,10 @@ const Body = () => {
             </div>
             <div className="res-container">
                 {
-                    restList.map(restaurant => (
-                        <RestaurantCard 
-                            key={restaurant?.card?.card?.info?.id} 
+                    filteredRestaurant.map(restaurant => (
+                        <Link  key={restaurant?.card?.card?.info?.id} to={ `/restaurants/${restaurant?.card?.card?.info?.id}`}><RestaurantCard
                             resData={restaurant}
-                        />
+                        /></Link>
                     ))
                 }
             </div>
