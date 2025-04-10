@@ -5,15 +5,15 @@ import React from 'react'
 class About extends React.Component{
     constructor(props){
         super(props)
-        console.log("Parent constructor")
+        //console.log("Parent constructor")
     }
     componentDidMount(){
-        console.log("parent component mount")
+        //console.log("parent component mount")
         //api call
         
     }
     render(){
-        console.log("Parent Render")
+        //console.log("Parent Render")
         
         return(
             <div>
@@ -21,7 +21,7 @@ class About extends React.Component{
             <h2>This is Namaste React</h2>
             {/* <User name={"vaishnav m v"}></User> */}
             <UserClass name={"first"}></UserClass>
-            <UserClass name={"second"}></UserClass>
+
         </div>
         )
         
