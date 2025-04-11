@@ -3,7 +3,7 @@ import resList from "../utils/mockData"
 import { useEffect, useState } from "react"
 import Shimmer from "./Shimmer"
 import { Link } from "react-router-dom"
-
+import useOnlineStatus from "../utils/useOnlineStatus"
 
 const Body = () => {
     // Initialize with restaurant cards from mock data
@@ -44,6 +44,10 @@ const Body = () => {
     // if(restList.length===0){
     //     return <Shimmer></Shimmer>
     // }
+
+    const onlineStatus=useOnlineStatus()
+    if(onlineStatus===false) return <h1>Looks like you are offline!!Pls check your internet connection</h1>
+
 
     return restList.length === 0 ? <Shimmer></Shimmer> : (
         <div className="body">
