@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard"
+import RestaurantCard,{withPromotedLabel} from "./RestaurantCard"
 import resList from "../utils/mockData"
 import { useEffect, useState } from "react"
 import Shimmer from "./Shimmer"
@@ -16,6 +16,8 @@ const Body = () => {
     const [filteredRestaurant, setFilteredRestaurant] = useState([])
 
     const [searchText, setSeachText] = useState("")
+
+    const RestaurantCardPromoted=withPromotedLabel(RestaurantCard)
 
     useEffect(() => {
         fetchData();
@@ -72,20 +74,22 @@ const Body = () => {
                         const filteredList = restList.filter(
                             (res) => res?.card?.card?.info?.avgRating > 4
                         );
-                        setListOfRest(filteredList);//modifying the restList using the method setListOfRest.whenever you call thismethod, it find ou the diff and updates the UI
+                        setFilteredRestaurant(filteredList);//modifying the restList using the method setListOfRest.whenever you call thismethod, it find ou the diff and updates the UI
                         //setListOfRest([]) leaves the restList empty
                     }}
                 >
-                    top rated restaurant
+                    Top Rated Restaurant
                 </button>
                 </div>
             </div>
             <div className="flex flex-wrap">
                 {
                     filteredRestaurant.map(restaurant => (
-                        <Link  key={restaurant?.card?.card?.info?.id} to={ `/restaurants/${restaurant?.card?.card?.info?.id}`}><RestaurantCard
-                            resData={restaurant}
-                        /></Link>
+                        <Link  key={restaurant?.card?.card?.info?.id} to={ `/restaurants/${restaurant?.card?.card?.info?.id}`}>
+                            {/* {if the restaurant is Promoted, add a label on it} */
+                                restaurant?.card?.card?.info?.promoted?<RestaurantCardPromoted resData={restaurant}/>:<RestaurantCard resData={restaurant}/>
+                            }  
+                        </Link>
                     ))
                 }
             </div>
