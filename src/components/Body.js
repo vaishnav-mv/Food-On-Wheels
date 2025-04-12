@@ -51,22 +51,23 @@ const Body = () => {
 
     return restList.length === 0 ? <Shimmer></Shimmer> : (
         <div className="body">
-            <div className="filter">
-                <div className="search">
+            <div className=" flex">
+                <div className="search m-4 p-4 ">
                     <input type="text"
-                        className="search-box"
+                        className="border-2 border-solid border-blue-500 rounded-lg"
                         value={searchText}
                         onChange={(e) => {
                             setSeachText(e.target.value)
                         }}></input>
-                    <button onClick={() => {
+                    <button className="px-2 py-1 m-3 bg-green-400 rounded-lg" onClick={() => {
                         console.log(searchText)
                         const filteredRes = restList.filter((res) => res.card.card.info.name.toLowerCase().includes(searchText.toLowerCase()))
                         setFilteredRestaurant(filteredRes)
                     }}>Search</button>
                 </div>
+                <div className="search m-4 p-4 flex items-center">
                 <button
-                    className="filter-btn"
+                    className="px-2 border-2 bg-amber-300 rounded-lg"
                     onClick={() => {
                         const filteredList = restList.filter(
                             (res) => res?.card?.card?.info?.avgRating > 4
@@ -77,8 +78,9 @@ const Body = () => {
                 >
                     top rated restaurant
                 </button>
+                </div>
             </div>
-            <div className="res-container">
+            <div className="flex flex-wrap">
                 {
                     filteredRestaurant.map(restaurant => (
                         <Link  key={restaurant?.card?.card?.info?.id} to={ `/restaurants/${restaurant?.card?.card?.info?.id}`}><RestaurantCard
