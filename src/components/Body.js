@@ -1,9 +1,10 @@
 import RestaurantCard,{withPromotedLabel} from "./RestaurantCard"
 import resList from "../utils/mockData"
-import { useEffect, useState } from "react"
+import { useEffect, useState,useContext } from "react"
 import Shimmer from "./Shimmer"
 import { Link } from "react-router-dom"
 import useOnlineStatus from "../utils/useOnlineStatus"
+import UserContext from "../utils/UserContext"
 
 const Body = () => {
     // Initialize with restaurant cards from mock data
@@ -51,6 +52,8 @@ const Body = () => {
     if(onlineStatus===false) return <h1>Looks like you are offline!!Pls check your internet connection</h1>
 
 
+    const {loggedInUser,setUserName}=useContext(UserContext)
+
     return restList.length === 0 ? <Shimmer></Shimmer> : (
         <div className="body">
             <div className=" flex">
@@ -80,6 +83,10 @@ const Body = () => {
                 >
                     Top Rated Restaurant
                 </button>
+                </div>
+                <div className="search m-4 p-4 flex items-center">
+                    <label>Username: </label>
+                    <input className="border border-black px-2 rounded-lg" value={loggedInUser} onChange={(e)=>setUserName(e.target.value)}></input>
                 </div>
             </div>
             <div className="flex flex-wrap">
