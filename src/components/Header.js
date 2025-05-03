@@ -34,10 +34,11 @@ const Header = () => {
                 <ul className="flex p-4">
                     <li className="px-4">Online Status:{onlineStatus?"🟢":"🔴"}</li>
                     <li className="px-4"><Link to="/">Home</Link></li>
-                    <li className="px-4"><Link to="about">About</Link></li>
-                    <li className="px-4"><Link to="contact">Contact</Link></li>
-                    <li className="px-4"><Link to="grocery">Grocery</Link></li>
-                    <li className="px-4 font-bold">Cart({cartItems.length} items)</li>
+                    <li className="px-4"><Link to="/about">About</Link></li>
+                    <li className="px-4"><Link to="/contact">Contact</Link></li>
+                    <li className="px-4"><Link to="/grocery">Grocery</Link></li>
+                    <li className="px-4 font-bold"><Link to="/cart">Cart({cartItems.length} items)</Link></li>
+                    
                     <button className="login" onClick={() => {
                         btnName==="login"?setBtnName("logout"):setBtnName("login")
                     }}>{btnName}</button>
